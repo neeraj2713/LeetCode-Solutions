@@ -1,19 +1,19 @@
 class Solution {
 public:
     bool isAnagram(string s, string t) {
-        if(s.size() != t.size()) return false;
-        map<char, int> bucket1;
-        map<char, int> bucket2;
-
-        for(char c:s){
-            bucket1[c]++;
-        }
-        
-        for(char c:t){
-            bucket2[c]++;
+        int freqTable[256] = {0};
+        for(int i=0;i<s.size();i++){
+            freqTable[s[i]]++;
         }
 
-        return bucket1==bucket2;
-        
+        for(int i=0;i<t.size();i++){
+            freqTable[t[i]]--;
+        }
+
+        for(int i=0;i<256;i++){
+            if(freqTable[i] != 0) return false;
+        }
+
+        return true;
     }
 };
