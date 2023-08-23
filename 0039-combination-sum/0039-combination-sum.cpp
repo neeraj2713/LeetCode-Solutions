@@ -1,6 +1,7 @@
 class Solution {
 public:
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        sort(candidates.begin(), candidates.end());
         vector<vector<int>> ans;
         vector<int> output;
         backtrack(candidates, 0, target, output, ans);
