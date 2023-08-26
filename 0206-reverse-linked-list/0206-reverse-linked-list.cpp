@@ -10,17 +10,22 @@
  */
 class Solution {
 public:
+    void reverseLL(ListNode* &head, ListNode* curr, ListNode* prev){
+        if(curr == NULL){
+            head = prev;
+            return;
+        }
+
+        ListNode* forward = curr->next;
+        reverseLL(head, forward, curr);
+        curr->next = prev;
+    }
+
+
     ListNode* reverseList(ListNode* head) {
         ListNode* curr = head;
         ListNode* prev = NULL;
-
-        while(curr){
-            ListNode* forward = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = forward;
-        }
-
-        return prev;
+        reverseLL(head, curr, prev);
+        return head;
     }
 };
