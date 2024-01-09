@@ -9,9 +9,9 @@ class Solution {
     vector<int> bfsOfGraph(int V, vector<int> adj[]) {
         // Code here
         int vis[V] = {0};
+        vector<int> bfs;
         vis[0] = 1;
         queue<int> q;
-        vector<int> bfs;
         q.push(0);
         
         while(!q.empty()){
