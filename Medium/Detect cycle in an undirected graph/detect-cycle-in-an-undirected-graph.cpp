@@ -5,24 +5,28 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   private:
-    bool detect(int src, vector<int> adj[], int vis[]){
-        vis[src] = 1;
-        queue<pair<int, int>> q;
-        q.push({src, -1});
+    bool bfs(int node, vector<int> adj[], int visited[]){
+        unordered_map<int, int> parent;
+        parent[node] = -1;
+        visited[node] = 1;
+        queue<int> q;
+        q.push(node);
+        
         while(!q.empty()){
-            int node = q.front().first;
-            int parent = q.front().second;
+            int front = q.front();
             q.pop();
             
-            for(auto adjNode : adj[node]){
-                if(!vis[adjNode]){
-                    vis[adjNode] = 1;
-                    q.push({adjNode, node});
-                } else if(parent != adjNode){
+            for(auto neighbour : adj[front]){
+                if(visited[neighbour] == true && neighbour != parent[front]){
                     return true;
+                } else if(!visited[neighbour]){
+                    q.push(neighbour);
+                    visited[neighbour] = 1;
+                    parent[neighbour] = front;
                 }
             }
         }
+        
         return false;
     }
   public:
@@ -30,14 +34,14 @@ class Solution {
     bool isCycle(int V, vector<int> adj[]) {
         // Code here
         int vis[V] = {0};
+        
         for(int i=0;i<V;i++){
             if(!vis[i]){
-                if(detect(i, adj, vis)) return true;
+                if(bfs(i, adj, vis) == true) return true;
+                vis[i] = 1;
             }
         }
-        
         return false;
-        
     }
 };
 
