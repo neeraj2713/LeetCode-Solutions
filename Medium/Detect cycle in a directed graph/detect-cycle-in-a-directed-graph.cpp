@@ -5,20 +5,17 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   private:
-    bool dfsCheck(int node, vector<int> adj[], int vis[], int pathVis[]){
+    bool dfs(int node, vector<int> adj[], int vis[], int pathVis[]){
         vis[node] = 1;
         pathVis[node] = 1;
         
-        for(auto it : adj[node]){
+        for(auto it: adj[node]){
             if(!vis[it]){
-                if(dfsCheck(it, adj, vis, pathVis) == true) return true;
-            } else if(pathVis[it]) {
+                if(dfs(it, adj, vis, pathVis)) return true;
+            } else if(pathVis[it]){
                 return true;
             }
         }
-        
-        
-        
         pathVis[node] = 0;
         return false;
     }
@@ -31,9 +28,10 @@ class Solution {
         
         for(int i=0;i<V;i++){
             if(!vis[i]){
-                if(dfsCheck(i, adj, vis, pathVis) == true) return true;
+                if(dfs(i, adj, vis, pathVis) == true) return true;
             }
         }
+        
         return false;
     }
 };
