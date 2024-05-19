@@ -7,7 +7,7 @@ public:
         vector<int> tempInterval = intervals[0];
 
         for(auto it : intervals){
-            if(it[0] <= tempInterval[1]){
+            if(it[0] <= tempInterval[1]) {
                 tempInterval[1] = max(it[1], tempInterval[1]);
             } else {
                 mergedIntervals.push_back(tempInterval);
