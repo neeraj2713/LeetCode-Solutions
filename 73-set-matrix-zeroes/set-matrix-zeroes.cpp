@@ -4,19 +4,19 @@ public:
         int row = matrix.size();
         int col = matrix[0].size();
 
-        bool rowZero = false;
         bool colZero = false;
-
-        for(int i=0;i<row;i++){
-            if(matrix[i][0] == 0){
-                colZero = true;
-                break;
-            }
-        }
+        bool rowZero = false;
 
         for(int i=0;i<col;i++){
             if(matrix[0][i] == 0){
                 rowZero = true;
+                break;
+            }
+        }
+
+        for(int i=0;i<row;i++){
+            if(matrix[i][0] == 0){
+                colZero = true;
                 break;
             }
         }
@@ -38,18 +38,16 @@ public:
             }
         }
 
-        if(rowZero){
-            for(int i=0;i<col;i++){
-                matrix[0][i] = 0;
-            }
-        }
-
         if(colZero){
             for(int i=0;i<row;i++){
                 matrix[i][0] = 0;
             }
         }
 
-        
+        if(rowZero){
+            for(int i=0;i<col;i++){
+                matrix[0][i] = 0;
+            }
+        }
     }
 };
