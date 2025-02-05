@@ -2,15 +2,26 @@ class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
         int n = nums.size();
-        if(n<3) return n;
-        int index = 2;
-        for(int i=2;i<n;i++){
-            if(nums[i] != nums[index-2]){
-                nums[index] = nums[i];
-                index++;
+        int l = 0;
+        int r = 0;
+
+        while(r < n){
+            int count = 1;
+            while((r+1) < n && nums[r] == nums[r+1]){
+                count++;
+                r++;
             }
+
+            int i = 0;
+            int mini = min(count, 2);
+            while(i < mini){
+                nums[l] = nums[r];
+                l++;
+                i++;
+            }
+            r++;
         }
 
-        return index;
+        return l;
     }
 };
