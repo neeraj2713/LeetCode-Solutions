@@ -1,18 +1,23 @@
 class Solution {
 public:
     int hIndex(vector<int>& citations) {
-        sort(citations.begin(), citations.end());
-        int h = citations.size();
+        int n = citations.size();
+        vector<int> bucket(n+1, 0);
 
-        for(int i=0;i<citations.size();i++){
-            if(citations[i] >= h){
-                return h;
+        for(int i=0;i<n;i++){
+            if(citations[i] > n){
+                bucket[n]++;
             } else {
-                if(h == 1 && citations[i] != 0) return 1;
-                h--;
+                bucket[citations[i]]++;
             }
         }
 
-        return h;
+        int count = 0;
+        for(int i=bucket.size()-1;i>=0;i--){
+            count += bucket[i];
+            if(count >= i) return i;
+        }
+
+        return -1;
     }
 };
