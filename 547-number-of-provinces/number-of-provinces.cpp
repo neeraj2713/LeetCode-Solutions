@@ -10,7 +10,6 @@ private:
     }
 public:
     int findCircleNum(vector<vector<int>>& isConnected) {
-        //creating adjacency list
         int V = isConnected.size();
         vector<int> adj[V];
         for(int i=0;i<V;i++){
@@ -22,16 +21,15 @@ public:
             }
         }
 
+        int count = 0;
         vector<int> vis(V, 0);
-        int provinces = 0;
         for(int i=0;i<V;i++){
             if(!vis[i]){
-                provinces++;
+                count++;
                 dfs(i, adj, vis);
             }
         }
 
-        return provinces;
-
+        return count;
     }
 };
