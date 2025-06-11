@@ -1,23 +1,30 @@
 class Solution {
+private:
+    int char2num(char a) {
+        switch (a) {
+            case 'I': return 1;
+            case 'V': return 5;
+            case 'X': return 10;
+            case 'L': return 50;
+            case 'C': return 100;
+            case 'D': return 500;
+            case 'M': return 1000;
+            default: return 0;
+        }
+    }
 public:
     int romanToInt(string s) {
-        unordered_map<char, int> mpp(7);
-        mpp['I'] = 1;
-        mpp['V'] = 5;
-        mpp['X'] = 10;
-        mpp['L'] = 50;
-        mpp['C'] = 100;
-        mpp['D'] = 500;
-        mpp['M'] = 1000;
+        int n = s.size();
+        int ans = char2num(s[n - 1]);
 
-        int ans = 0;
-        for(int i=0;i<s.size();i++){
-            if(mpp[s[i]] < mpp[s[i+1]]){
-                ans -= mpp[s[i]];
+        for (int i = n - 2; i >= 0; i--) {
+            if (char2num(s[i]) < char2num(s[i + 1])) {
+                ans -= char2num(s[i]);
             } else {
-                ans += mpp[s[i]];
+                ans += char2num(s[i]);
             }
         }
+
         return ans;
     }
 };
