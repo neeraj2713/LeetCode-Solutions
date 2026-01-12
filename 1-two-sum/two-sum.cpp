@@ -4,12 +4,14 @@ public:
         unordered_map<int, int> mpp;
 
         for(int i=0;i<nums.size();i++){
-            if(mpp.find(target - nums[i]) != mpp.end()){
-                return {i, mpp[target-nums[i]]};
+            int need = target - nums[i];
+            if(mpp.find(need) != mpp.end()) {
+                return {mpp[need], i};
+            } else {
+                mpp[nums[i]] = i;
             }
-            mpp[nums[i]] = i;
         }
 
-        return {-1};
+        return {};
     }
 };
